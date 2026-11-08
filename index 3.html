@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071126">
+<title>Under the Stars | Wedding Invitation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+:root{
+  --navy:#071126;--navy2:#101d38;--gold:#e8c98d;--champagne:#f5e3bd;
+  --silver:#dce4f2;--muted:#aab7cb;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--navy);color:#f8f3e9;font-family:Montserrat, sans-serif;overflow-x:hidden}
+button,input,textarea{font:inherit}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.scene{position:relative;z-index:1;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:30px 18px;overflow:hidden}
+.scene:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 25%,rgba(40,66,112,.38),transparent 58%),linear-gradient(180deg,rgba(4,11,27,.12),rgba(4,10,24,.78));pointer-events:none}
+.moon{position:absolute;top:7%;right:12%;width:clamp(72px,13vw,132px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fffef5 0,#f5edda 35%,#d7d4ce 68%,#aab6c8 100%);box-shadow:0 0 28px rgba(229,233,245,.32),0 0 90px rgba(198,211,235,.2);opacity:.92}
+.moon:after{content:"";position:absolute;inset:9% -8% 0 28%;border-radius:50%;background:rgba(7,17,38,.9);filter:blur(1px)}
+.hero{width:min(760px,100%);text-align:center;position:relative;padding:50px 22px 42px}
+.eyebrow{font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--silver);opacity:.85}
+.rule{width:58px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:22px auto}
+.hero h1{font:300 clamp(19px,3vw,27px) 'Cormorant Garamond',serif;letter-spacing:.2em;text-transform:uppercase;color:#e9e8e5;margin:0}
+.names{font:clamp(54px,11vw,100px) 'Great Vibes',cursive;color:var(--champagne);line-height:1.08;margin:20px 0 8px;text-shadow:0 0 18px rgba(238,205,143,.28),0 0 55px rgba(219,181,113,.22);opacity:0;filter:blur(8px);transform:translateY(15px);transition:1.8s ease}
+.names.show{opacity:1;filter:blur(0);transform:none}
+.amp{font:italic 300 .55em 'Cormorant Garamond',serif;color:var(--silver);padding:0 8px}
+.intro{font:300 clamp(15px,2.5vw,20px) 'Cormorant Garamond',serif;letter-spacing:.08em;color:#e6e8ef;line-height:1.7;margin:20px auto 0;max-width:480px}
+.goldline{height:1px;width:min(280px,70%);margin:28px auto;background:linear-gradient(90deg,transparent,rgba(232,201,141,.8),transparent)}
+.date{font:400 clamp(20px,4vw,29px) 'Cormorant Garamond',serif;letter-spacing:.18em;color:var(--champagne)}
+.details{font-size:10px;line-height:2.1;letter-spacing:.17em;text-transform:uppercase;color:#c7d0df;margin-top:12px}
+.cta{display:inline-flex;align-items:center;justify-content:center;margin-top:30px;padding:14px 24px;border:1px solid rgba(232,201,141,.65);color:var(--champagne);background:rgba(10,22,45,.35);letter-spacing:.2em;text-transform:uppercase;font-size:9px;cursor:pointer;transition:.35s}
+.cta:hover{background:rgba(232,201,141,.12);box-shadow:0 0 24px rgba(232,201,141,.16)}
+#particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.spark{position:absolute;width:3px;height:3px;border-radius:50%;background:#f4dca9;box-shadow:0 0 9px 2px rgba(245,218,166,.8);animation:rise 3.5s ease-out forwards}
+@keyframes rise{0%{opacity:0;transform:translateY(35px) scale(.3)}20%{opacity:1}100%{opacity:0;transform:translateY(-130px) scale(0)}}
+.section{position:relative;z-index:1;padding:85px 20px;background:linear-gradient(180deg,rgba(7,17,38,.08),rgba(5,13,29,.97));text-align:center}
+.section-inner{max-width:650px;margin:auto}
+.section h2{font:300 34px 'Cormorant Garamond',serif;letter-spacing:.12em;color:var(--champagne);margin:0 0 12px}
+.section p{font:300 17px/1.8 'Cormorant Garamond',serif;color:#d4dbea}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:34px 0}
+.info{padding:23px 12px;border:1px solid rgba(220,228,242,.2);background:rgba(15,29,55,.5)}
+.info small{display:block;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.info strong{font:400 20px 'Cormorant Garamond',serif;color:#f2eee7}
+.info span{display:block;font-size:10px;line-height:1.8;color:#bdc8d9;margin-top:8px}
+.rsvp{max-width:440px;margin:35px auto 0;text-align:left}
+.rsvp label{display:block;color:#d8c59f;font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin:17px 0 8px}
+.rsvp input,.rsvp textarea,.rsvp select{width:100%;padding:13px 12px;border:1px solid rgba(220,228,242,.25);background:rgba(8,18,38,.8);color:#f7f1e7;outline:none;border-radius:0}
+.rsvp input:focus,.rsvp textarea:focus,.rsvp select:focus{border-color:var(--gold)}
+.rsvp button{width:100%;margin-top:20px;padding:15px;background:var(--gold);color:#10182a;border:0;text-transform:uppercase;letter-spacing:.2em;font-size:10px;cursor:pointer}
+#thanks{display:none;text-align:center;color:var(--champagne);font:20px 'Cormorant Garamond',serif;margin-top:20px}
+footer{position:relative;z-index:1;text-align:center;padding:28px 12px 45px;color:#8e9bb1;font-size:8px;letter-spacing:.25em;text-transform:uppercase;background:#050d1d}
+@media(max-width:520px){.moon{right:8%;top:6%}.hero{padding:65px 10px 35px}.info-grid{gap:9px}.info{padding:18px 8px}.section{padding:68px 18px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<section class="scene" id="home">
+  <div class="moon" aria-hidden="true"></div>
+  <div id="particles"></div>
+  <main class="hero">
+    <div class="eyebrow">A night written in the stars</div>
+    <div class="rule"></div>
+    <h1>Together with their families</h1>
+    <div class="names" id="names">Amara <span class="amp">&</span> Daniel</div>
+    <div class="intro">invite you to celebrate the beginning<br>of their forever</div>
+    <div class="goldline"></div>
+    <div class="date">SATURDAY · 20 JUNE 2027</div>
+    <div class="details">Four o’clock in the evening<br>The Celestial Garden · Accra, Ghana</div>
+    <button class="cta" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})">Discover the evening</button>
+  </main>
+</section>
+<section class="section" id="details">
+  <div class="section-inner">
+    <div class="eyebrow">Beneath the same stars</div>
+    <div class="rule"></div>
+    <h2>A celebration of love</h2>
+    <p>With grateful hearts, we would be honoured to have you with us as we begin our next chapter. Your presence will make our night complete.</p>
+    <div class="info-grid">
+      <div class="info"><small>The date</small><strong>20 June 2027</strong><span>Saturday<br>4:00 PM</span></div>
+      <div class="info"><small>The venue</small><strong>The Celestial Garden</strong><span>Airport Residential Area<br>Accra, Ghana</span></div>
+    </div>
+    <h2 style="font-size:29px">Kindly respond</h2>
+    <p>Please let us know if you will be joining us.</p>
+    <form class="rsvp" id="rsvpForm">
+      <label for="guest">Your full name</label><input id="guest" name="guest" required placeholder="Enter your name">
+      <label for="attendance">Will you attend?</label><select id="attendance" name="attendance" required><option value="">Please select</option><option>Joyfully accepts</option><option>Regretfully declines</option></select>
+      <label for="guests">Number of guests</label><select id="guests" name="guests"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+      <label for="message">A message for the couple (optional)</label><textarea id="message" name="message" rows="3" placeholder="Write a little note..."></textarea>
+      <button type="submit">Send response</button>
+      <div id="thanks">Thank you. Your response has been prepared.</div>
+    </form>
+    <p style="font-size:13px;margin-top:28px;color:#aab7cb">For enquiries: 020 000 0000</p>
+  </div>
+</section>
+<footer>Amara & Daniel · Written in the stars · 2027</footer>
+<script>
+const canvas=document.getElementById('sky'),ctx=canvas.getContext('2d');
+let w,h,stars=[];
+function resize(){w=canvas.width=innerWidth*devicePixelRatio;h=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';stars=Array.from({length:Math.min(220,Math.floor(innerWidth/4))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.25,a:Math.random()*.75+.15,s:Math.random()*.018+.004,p:Math.random()*6.28}));}
+function draw(){ctx.clearRect(0,0,w,h);for(const st of stars){st.p+=st.s;const alpha=st.a*(.62+.38*Math.sin(st.p));ctx.beginPath();ctx.arc(st.x,st.y,st.r*devicePixelRatio,0,Math.PI*2);ctx.fillStyle=`rgba(235,239,249,${alpha})`;ctx.shadowBlur=st.r>1?8:3;ctx.shadowColor='#dce4f2';ctx.fill();}requestAnimationFrame(draw)}
+addEventListener('resize',resize);resize();draw();
+const names=document.getElementById('names'),particleBox=document.getElementById('particles');
+function reveal(){for(let i=0;i<95;i++){const s=document.createElement('i');s.className='spark';s.style.left=(15+Math.random()*70)+'%';s.style.top=(48+Math.random()*35)+'%';s.style.animationDelay=(Math.random()*1.4)+'s';s.style.animationDuration=(2.4+Math.random()*2)+'s';particleBox.appendChild(s);setTimeout(()=>s.remove(),5000)}setTimeout(()=>names.classList.add('show'),750)}
+window.addEventListener('load',()=>setTimeout(reveal,500));
+document.querySelector('.cta').addEventListener('click',()=>{});
+document.getElementById('rsvpForm').addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;const data=Object.fromEntries(new FormData(f).entries());const body=`Wedding RSVP\nName: ${data.guest}\nAttendance: ${data.attendance}\nGuests: ${data.guests}\nMessage: ${data.message||'—'}`;const phone='233200000000';window.location.href=`https://wa.me/${phone}?text=${encodeURIComponent(body)}`;document.getElementById('thanks').style.display='block';});
+</script>
+</body>
+</html>
